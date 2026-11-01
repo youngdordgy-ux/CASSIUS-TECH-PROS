@@ -1,7 +1,8 @@
+
 {
-  "name": "knightbot",
+  "name": "cassius-tech-pros",
   "version": "1.0.0",
-  "description": "WhatsApp Bot",
+  "description": "CASSIUS TECH PROS - Advanced WhatsApp Automation Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -13,12 +14,15 @@
     "install:panel": "npm install --legacy-peer-deps",
     "install:force": "npm install --force",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker:build": "docker build -t docker run -e SESSION_ID=$SESSION_ID knightbot"
+    "docker:build": "docker build -t cassius-tech-pros ."
   },
   "keywords": [
-    "whatsapp-bot"
+    "cassius",
+    "cassius-tech-pros",
+    "whatsapp-bot",
+    "baileys"
   ],
-  "author": "",
+  "author": "CASSIUS",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
@@ -50,7 +54,6 @@
     "node-fetch": "^2.7.0",
     "node-id3": "^0.2.3",
     "node-webpmux": "^3.1.0",
-    "node-youtube-music": "^0.8.3",
     "performance-now": "^2.1.0",
     "phin": "^3.7.1",
     "pino": "^8.21.0",
