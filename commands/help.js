@@ -3,18 +3,25 @@ const fs = require('fs');
 const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
-    const helpMessage = `
-╔═══════════════════╗
-   *🤖 ${settings.botName || 'KnightBot-MD'}*  
-   Version: *${settings.version || '3.0.0'}*
-   by ${settings.botOwner || 'Mr Unique Hacker'}
-   YT : ${global.ytch}
-╚═══════════════════╝
+const botName = settings.botName || 'CASSIUS TECH PROS';
+const version = settings.version || '3.0.8';
+const owner = settings.botOwner || 'CASSIUS';
+const channelLink = global.channelLink || 'https://whatsapp.com/channel/0029VbDeT5tKwqSM5FGMaK3p';
 
-*Available Commands:*
+const helpMessage = `
+
+╔══════════════════════════╗
+🤖 ${botName}
+╠══════════════════════════╣
+Version: ${version}
+Owner: ${owner}
+Channel: CASSIUS TECH PROS
+╚══════════════════════════╝
+
+Available Commands:
 
 ╔═══════════════════╗
-🌐 *General Commands*:
+🌐 General Commands:
 ║ ➤ .help or .menu
 ║ ➤ .ping
 ║ ➤ .alive
@@ -29,17 +36,17 @@ async function helpCommand(sock, chatId, message) {
 ║ ➤ .lyrics <song_title>
 ║ ➤ .8ball <question>
 ║ ➤ .groupinfo
-║ ➤ .staff or .admins 
+║ ➤ .staff or .admins
 ║ ➤ .vv
 ║ ➤ .vv2
 ║ ➤ .trt <text> <lang>
 ║ ➤ .ss <link>
 ║ ➤ .jid
 ║ ➤ .url
-╚═══════════════════╝ 
+╚═══════════════════╝
 
 ╔═══════════════════╗
-👮‍♂️ *Admin Commands*:
+👮‍♂️ Admin Commands:
 ║ ➤ .ban @user
 ║ ➤ .promote @user
 ║ ➤ .demote @user
@@ -69,7 +76,7 @@ async function helpCommand(sock, chatId, message) {
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🔒 *Owner Commands*:
+🔒 Owner Commands:
 ║ ➤ .mode <public/private>
 ║ ➤ .clearsession
 ║ ➤ .antidelete
@@ -91,33 +98,33 @@ async function helpCommand(sock, chatId, message) {
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🎨 *Image/Sticker Commands*:
+🎨 Image/Sticker Commands:
 ║ ➤ .blur <image>
 ║ ➤ .simage <reply to sticker>
 ║ ➤ .sticker <reply to image>
 ║ ➤ .removebg
 ║ ➤ .remini
-║ ➤ .crop (reply sticker/image/video)
-║ ➤ .tgsticker <Link>
+║ ➤ .crop
+║ ➤ .tgsticker <link>
 ║ ➤ .meme
-║ ➤ .take <packname> 
+║ ➤ .take <packname>
 ║ ➤ .emojimix <emj1>+<emj2>
 ║ ➤ .igs <insta link>
 ║ ➤ .igsc <insta link>
-╚═══════════════════╝  
+╚═══════════════════╝
 
 ╔═══════════════════╗
-🖼️ *Pies Commands*:
+🖼️ Pics Commands:
 ║ ➤ .pies <country>
-║ ➤ .china 
-║ ➤ .indonesia 
-║ ➤ .japan 
-║ ➤ .korea 
+║ ➤ .china
+║ ➤ .indonesia
+║ ➤ .japan
+║ ➤ .korea
 ║ ➤ .hijab
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🎮 *Game Commands*:
+🎮 Game Commands:
 ║ ➤ .tictactoe @user
 ║ ➤ .hangman
 ║ ➤ .guess <letter>
@@ -128,7 +135,7 @@ async function helpCommand(sock, chatId, message) {
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🤖 *AI Commands*:
+🤖 AI Commands:
 ║ ➤ .ai <question>
 ║ ➤ .gpt <question>
 ║ ➤ .gemini <question>
@@ -138,10 +145,10 @@ async function helpCommand(sock, chatId, message) {
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🎯 *Fun Commands*:
+🎯 Fun Commands:
 ║ ➤ .compliment @user
 ║ ➤ .insult @user
-║ ➤ .flirt 
+║ ➤ .flirt
 ║ ➤ .shayari
 ║ ➤ .goodnight
 ║ ➤ .roseday
@@ -153,7 +160,7 @@ async function helpCommand(sock, chatId, message) {
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🔤 *Textmaker*:
+🔤 Textmaker:
 ║ ➤ .metallic <text>
 ║ ➤ .ice <text>
 ║ ➤ .snow <text>
@@ -175,7 +182,7 @@ async function helpCommand(sock, chatId, message) {
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-📥 *Downloader*:
+📥 Downloader:
 ║ ➤ .play <song_name>
 ║ ➤ .song <song_name>
 ║ ➤ .spotify <query>
@@ -183,44 +190,44 @@ async function helpCommand(sock, chatId, message) {
 ║ ➤ .facebook <link>
 ║ ➤ .twitter <link>
 ║ ➤ .tiktok <link>
-║ ➤ .video <song name>
-║ ➤ .ytmp4 <Link>
+║ ➤ .video <song_name>
+║ ➤ .ytmp4 <link>
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🧩 *MISC*:
+🧩 MISC:
 ║ ➤ .heart
 ║ ➤ .horny
 ║ ➤ .circle
 ║ ➤ .lgbt
 ║ ➤ .lolice
 ║ ➤ .its-so-stupid
-║ ➤ .namecard 
+║ ➤ .namecard
 ║ ➤ .oogway
 ║ ➤ .tweet
-║ ➤ .ytcomment 
-║ ➤ .comrade 
-║ ➤ .gay 
-║ ➤ .glass 
-║ ➤ .jail 
-║ ➤ .passed 
+║ ➤ .ytcomment
+║ ➤ .comrade
+║ ➤ .gay
+║ ➤ .glass
+║ ➤ .jail
+║ ➤ .passed
 ║ ➤ .triggered
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-🖼️ *ANIME*:
-║ ➤ .nom 
-║ ➤ .poke 
-║ ➤ .cry 
-║ ➤ .kiss 
-║ ➤ .pat 
-║ ➤ .hug 
-║ ➤ .wink 
-║ ➤ .facepalm 
+🖼️ ANIME:
+║ ➤ .nom
+║ ➤ .poke
+║ ➤ .cry
+║ ➤ .kiss
+║ ➤ .pat
+║ ➤ .hug
+║ ➤ .wink
+║ ➤ .facepalm
 ╚═══════════════════╝
 
 ╔═══════════════════╗
-💻 *Github Commands:*
+💻 GitHub Commands:
 ║ ➤ .git
 ║ ➤ .github
 ║ ➤ .sc
@@ -228,46 +235,49 @@ async function helpCommand(sock, chatId, message) {
 ║ ➤ .repo
 ╚═══════════════════╝
 
-Join our channel for updates:`;
+📢 Join our official channel:
+${https://whatsapp.com/channel/0029VbDeT5tKwqSM5FGMaK3p}
 
-    try {
-        const imagePath = path.join(__dirname, '../assets/bot_image.jpg');
-        
-        if (fs.existsSync(imagePath)) {
-            const imageBuffer = fs.readFileSync(imagePath);
-            
-            await sock.sendMessage(chatId, {
-                image: imageBuffer,
-                caption: helpMessage,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'KnightBot MD',
-                        serverMessageId: -1
-                    }
-                }
-            },{ quoted: message });
-        } else {
-            console.error('Bot image not found at:', imagePath);
-            await sock.sendMessage(chatId, { 
-                text: helpMessage,
-                contextInfo: {
-                    forwardingScore: 1,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363161513685998@newsletter',
-                        newsletterName: 'KnightBot MD by Mr Unique Hacker',
-                        serverMessageId: -1
-                    } 
-                }
-            });
+━━━━━━━━━━━━━━━━━━━━
+⚡ POWERED BY CASSIUS TECH PROS
+👑 OWNER: CASSIUS
+━━━━━━━━━━━━━━━━━━━━
+`;
+
+try {
+    const imagePath = path.join(__dirname, '../assets/bot_image.jpg');
+
+    const contextInfo = {
+        forwardingScore: 1,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+            newsletterJid: '120363161513685998@newsletter',
+            newsletterName: 'CASSIUS TECH PROS',
+            serverMessageId: -1
         }
-    } catch (error) {
-        console.error('Error in help command:', error);
-        await sock.sendMessage(chatId, { text: helpMessage });
+    };
+
+    if (fs.existsSync(imagePath)) {
+        const imageBuffer = fs.readFileSync(imagePath);
+
+        await sock.sendMessage(chatId, {
+            image: imageBuffer,
+            caption: helpMessage,
+            contextInfo
+        }, { quoted: message });
+    } else {
+        await sock.sendMessage(chatId, {
+            text: helpMessage,
+            contextInfo
+        }, { quoted: message });
     }
+} catch (error) {
+    console.error('Error in CASSIUS TECH PROS help command:', error);
+    await sock.sendMessage(chatId, {
+        text: helpMessage
+    }, { quoted: message });
+}
+
 }
 
 module.exports = helpCommand;
